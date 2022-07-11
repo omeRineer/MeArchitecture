@@ -16,6 +16,11 @@ namespace Core.Utilities.Interceptor
             var classInterceptors=type.GetCustomAttributes<InterceptorAspect>().ToList();
             classInterceptors.AddRange(methodInterceptors);
 
+            classInterceptors.AddRange(new List<InterceptorAspect>
+            {
+
+            });
+
             return classInterceptors.ToArray();
         }
     }

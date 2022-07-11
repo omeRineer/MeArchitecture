@@ -31,12 +31,6 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<ICategoryDal, EfCategoryDal>();
-            services.AddSingleton<IProductDal, EfProductDal>();
-
-            services.AddSingleton<ICategoryService, CategoryManager>();
-            services.AddSingleton<IProductService, ProductManager>();
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

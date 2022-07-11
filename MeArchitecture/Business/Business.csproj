@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DependencyResolvers\Autofac\" />
     <Folder Include="DependencyResolvers\Ninject\" />
   </ItemGroup>
 
