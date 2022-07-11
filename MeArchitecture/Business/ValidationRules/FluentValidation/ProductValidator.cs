@@ -14,7 +14,7 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(c => c.ProductName)
                 .NotEmpty().WithMessage("The area is not empty")
-                .MinimumLength(2).WithMessage("Please minimum {MinLength} length. Preview : {TotalLength}");
+                .MinimumLength(2).WithMessage("Please minimum {MinLength} length.\nPreview : {TotalLength}");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Contains.Messages;
+using Business.Constans;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.BusinessRules;
 using Core.Utilities.ResultTool;
@@ -23,10 +24,9 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
+        [ValidationAspect(typeof(CategoryValidator))]
         public IResult Add(Category category)
         {
-            ValidationTool<Category>.Validate(new CategoryValidator(), category);
-
             var businessRules = BusinessTool.Run();
             if (!businessRules.Success)
             {
@@ -34,7 +34,7 @@ namespace Business.Concrete
             }
 
             _categoryDal.Add(category);
-            return new SuccessResult(Messages.CategoryAdded);
+            return new SuccessResult(Message.CategoryAdded);
         }
 
         public IResult Delete(Category category)
@@ -46,7 +46,7 @@ namespace Business.Concrete
             }
 
             _categoryDal.Delete(category);
-            return new SuccessResult(Messages.CategoryDeleted);
+            return new SuccessResult(Message.CategoryDeleted);
         }
 
         public IDataResult<List<Category>> GetAll()
@@ -59,6 +59,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Category>(_categoryDal.Get(x => x.Id == id));
         }
 
+        [ValidationAspect(typeof(CategoryValidator))]
         public IResult Update(Category category)
         {
             var businessRules = BusinessTool.Run();
@@ -68,7 +69,7 @@ namespace Business.Concrete
             }
 
             _categoryDal.Update(category);
-            return new SuccessResult(Messages.CategoryUpdated);
+            return new SuccessResult(Message.CategoryUpdated);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
-using Business.Contains.Messages;
+using Business.Constans;
 using Business.ValidationRules.FluentValidation;
+using Core;
+using Core.Aspects.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.BusinessRules;
 using Core.Utilities.ResultTool;
@@ -23,10 +25,9 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
-            ValidationTool<Product>.Validate(new ProductValidator(), product);
-
             var businessRules = BusinessTool.Run
                 (
 
@@ -37,7 +38,7 @@ namespace Business.Concrete
             }
 
             _productDal.Add(product);
-            return new SuccessResult(Messages.ProductAdded);
+            return new SuccessResult(Message.ProductAdded);
         }
 
         public IResult Delete(Product product)
@@ -49,7 +50,7 @@ namespace Business.Concrete
             }
 
             _productDal.Delete(product);
-            return new SuccessResult(Messages.ProductDeleted);
+            return new SuccessResult(Message.ProductDeleted);
         }
 
         public IDataResult<List<Product>> GetAll()
@@ -62,6 +63,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Product>(_productDal.Get(x => x.Id == id));
         }
 
+        [ValidationAspect(typeof(ProductValidator))]
         public IResult Update(Product product)
         {
             var businessRules = BusinessTool.Run();
@@ -71,7 +73,7 @@ namespace Business.Concrete
             }
 
             _productDal.Update(product);
-            return new SuccessResult(Messages.ProductUpdated);
+            return new SuccessResult(Message.ProductUpdated);
         }
 
 
@@ -81,7 +83,7 @@ namespace Business.Concrete
             var result = _productDal.Get(x => x.ProductName == product.ProductName);
             if (result != null)
             {
-                return new ErrorResult("Product is exist");
+                return new ErrorResult(Message.ProductAlreadyExist);
             }
             return new SuccessResult();
         }
@@ -90,7 +92,7 @@ namespace Business.Concrete
             var result = _productDal.GetAll().Count();
             if (result >= 15)
             {
-                return new ErrorResult("Product limit is full");
+                return new ErrorResult(Message.ProductLimitIsFull);
             }
             return new SuccessResult();
         }
