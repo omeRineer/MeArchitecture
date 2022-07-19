@@ -1,5 +1,4 @@
 --AOP Altyapısı (Autofac)
 --Global IOC Container Altyapısı (Autofac,Ninject)
 --JWT Konfigürasyonu
---Global Hata Yönetimi
 --CQRS Entegrasyonu
