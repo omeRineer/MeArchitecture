@@ -33,6 +33,8 @@ namespace Core.Middlewares.ExceptionHandler
 
         private Task ExceptionHandle(HttpContext context, Exception exception)
         {
+            context.Response.StatusCode = 400;
+
             Type exceptionType = exception.GetType();
             int statusCode = context.Response.StatusCode;
             string message = exception.Message;
@@ -41,7 +43,6 @@ namespace Core.Middlewares.ExceptionHandler
             if (exceptionType == typeof(ValidationException))
             {
                 var validationException = exception as ValidationException;
-
                 return context.Response.WriteAsync(new ValidationExceptionDetail
                 {
                     Type = exceptionType.Name,

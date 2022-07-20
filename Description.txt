@@ -1,4 +1,13 @@
---AOP Altyapısı (Autofac)
+--CrossCuttingConcerns entegrasyonları
+--Sıralama Filtreleme ve Sayfalandırma
 --Global IOC Container Altyapısı (Autofac,Ninject)
 --JWT Konfigürasyonu
 --CQRS Entegrasyonu
+
+
+
+
+-----------------------------Mevcut
+--AOP altyapısı
+--Fluent validation altyapısı
+--Global hata yönetimi
