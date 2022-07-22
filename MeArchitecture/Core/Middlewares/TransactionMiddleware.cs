@@ -31,7 +31,6 @@ namespace Core.Middlewares
                     scope.Dispose();
                 }
             }
-
         }
     }
 }
