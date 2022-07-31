@@ -35,8 +35,11 @@ namespace WebAPI
         {
             services.AddServiceModules(new IServiceModule[]
             {
-                new MeArchitectureServiceModule(Configuration)
+                new MeArchitectureServiceModule(Configuration),
+                new StaticServiceModule()
             });
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

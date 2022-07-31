@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constans;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Authorizaton;
 using Core.Aspects.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.BusinessRules;
@@ -49,6 +50,7 @@ namespace Business.Concrete
             return new SuccessResult(Message.CategoryDeleted);
         }
 
+        [Authorize]
         public IDataResult<List<Category>> GetAll()
         {
             return new SuccessDataResult<List<Category>>(_categoryDal.GetAll());
